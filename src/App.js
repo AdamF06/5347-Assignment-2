@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {ADD_USERNAME,DELETE_EVERYTHING} from './constants'
 
