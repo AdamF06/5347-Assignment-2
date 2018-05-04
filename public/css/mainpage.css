@@ -1,7 +1,22 @@
-h1, h2, h3, nav, footer {
- font-family: Georgia, Cambria, "Times New Roman", serif;
+h1{
+	margin-top:80px;
+	text-align:center;
+	clear:both;
 }
-
-h3{
- color:red;
+button{
+	background:#ffffff;
+	border:1px #ffffff solid;
+	outline:none;
+}
+div#imgdiv{
+	margin-top:80px;
+	text-align:center;
+}
+div.butdiv{
+	margin-top:5px;
+	float:right;
+}
+input{
+	margin-top:20px;
+	width:30%
 }
