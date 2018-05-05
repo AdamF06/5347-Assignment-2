@@ -3,20 +3,23 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/register.css" media="screen" />
+
 </head>
 <body>
 <form method="post" action="">
 <center>
 <p>Please filling following information:</p>
+<form method="post" action="register">
 <table>
 <tbody>
-	<tr>
+	<tr id="tr">
 		<td>
 		User Name:
 		</td>
 		<td>
-		<input type="text" name="user_name"/>
+		<input id="required" type="text" name="user_name" oninput="StringInput (event)"/>
 		</td>
+		<td class="alert_info">*Input foramt error</td>
 	</tr>
 
 	<tr>
@@ -24,45 +27,175 @@
 		Fisrt Name:
 		</td>
 		<td>
-		<input type="text" name="first_name"/>
+		<input id="required" type="text" name="first_name" oninput="StringInput (event)"/>
 		</td>
+		<td class="alert_info">*Input foramt error</td>
 	</tr>
+
 	<tr>
 		<td>
 		Last Name:
 		</td>
 		<td>
-		<input type="text" name="last_name"/>
+		<input id="required" type="text" name="last_name" oninput="StringInput (event)"/>
 		</td>
+		<td  class="alert_info">*Input foramt error</td>
 	</tr>
+
 	<tr>
 		<td>
-		Passward:
+		Password:
 		</td>
 		<td>
-		<input type="text" name="passward"/>
+		<input id="required" type="password" class="pass_word" name="password" oninput="CheckPasswordFormat (event)"/>
 		</td>
+		<td class="alert_info"></td>
 	</tr>
+
 	<tr>
 		<td>
-		Renter passward:
+		Renter password:
 		</td>
 		<td>
-		<input type="text" name="re_passward"/>
+		<input id="required" type="password" class="pass_word" name="re_password" oninput="CheckPasswordFormat(event)"/>
 		</td>
+		<td class="alert_info" id="password_alert"></td>
 	</tr>
+
 	<tr>
 		<td>
 		E-mail address:
 		</td>
 		<td>
-		<input type="text" name="email_address"/>
+		<input id="required" type="text" name="email_address" oninput="CheckEmail (event)"/>
 		</td>
+		<td class="alert_info">*E-mail address format error</td>
 	</tr>
 </tbody>
 </table>
 </center>
-
+	<div>
+	<button  type="button"  value="Submit"  onclick="Submit (event)">Submit</button>
+	<button type="button" value="Clear Form" onclick="Clear (event)">Clear Form</button>
+	</div>
 </form>
 </body>
+
+<script type="text/javascript">
+	function StringInput (event) {
+		var value = event.target.value;
+		var event = event;
+		checkusername(value,event);
+	}
+
+	function checkusername(value,event){
+		var regex = /^[0-9a-zA-Z\u4e00-\u9fa5]*$/;
+		if(regex.test(value) == true){
+			//format correct, re-invi alert info
+			var obj = event.target;
+			var node = obj.parentNode.parentNode.lastElementChild;
+			node.style.display="none";
+		}else{
+			//format error
+			var obj = event.target;
+			var node = obj.parentNode.parentNode.lastElementChild;
+			node.style.display="inline";
+		}
+	}
+
+	//on click event triggered
+	function CheckPasswordFormat (event){
+		var value = event.target.value;
+		var regex = /^[0-9a-zA-Z\u4e00-\u9fa5]*$/;
+		if(regex.test(value) == true){
+			//format correct, re-invi alert info
+			var obj = event.target;
+			var node = obj.parentNode.parentNode.lastElementChild;
+			node.innerHTML="";
+			node.style.display="none";
+		}else{
+			//format error
+			var obj = event.target;
+			var node = obj.parentNode.parentNode.lastElementChild;
+			node.innerHTML="*Input format error";
+			node.style.display="inline";
+		}
+		CheckPasswordConsist(event);
+	}
+
+	//if any passward's format incurrect, do nothing
+	function CheckPasswordConsist (event){
+		var passwords = document.getElementsByClassName("pass_word");
+		var format = false;
+		var j=0;
+		for(var i=0; i<passwords.length; i++){
+			var alert_info = passwords[i].parentNode.parentNode.lastElementChild;
+			if(alert_info.innerHTML=="*Input format error"){
+				j=j+1;
+			}
+		}
+
+		if(j>0){
+			format = false;
+		}else{
+			format = true;
+		}
+
+		//currect format but different passward
+		if(format==true){
+			if(passwords[0].value != passwords[1].value){
+				// two passwards are different
+				for(var i=0; i<passwords.length; i++){
+					var alert_info = passwords[i].parentNode.parentNode.lastElementChild;
+					alert_info.innerHTML="*Two passwards are different"
+					alert_info.style.display="inline";
+				}
+			}else{
+				for(var i=0; i<passwords.length; i++){
+					var alert_info = passwords[i].parentNode.parentNode.lastElementChild;
+					alert_info.innerHTML="";
+					alert_info.style.display="none";
+				}
+			}
+		}
+	}
+
+	function CheckEmail (event){
+		var value = event.target.value;
+		var regex = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+
+		var obj = event.target;
+		var node = obj.parentNode.parentNode.lastElementChild;
+		if(regex.test(value) == false &&value!=""){
+			node.style.display="inline";
+		}else{
+			node.style.display="none";
+		}
+	}
+
+	function Clear (event){
+		var info_list =	document.getElementsByClassName("alert_info");
+		var required_element_list = document.getElementById("required");
+		for(var i=0; i<info_list.length; i++){
+			info_list[i].style.display="none";
+		}
+		for (var i=0; i < required_element_list.length; i++){
+			required_element_list[i].innerHTML="";
+		}
+	}
+
+	function Submit (event){
+	var required_element_list = document.getElementById("required");
+	for (var i=0; i < required_element_list.length; i++){
+	    if( isBlank(required_element_list[i]) ){
+			e.preventDefault();
+			makeRed(required_element_list[i]);
+	    }
+	    else{
+			makeClean(required_element_list[i]);
+	    }
+	}
+	}
+
+</script>
 </html>
