@@ -1,0 +1,22 @@
+h1{
+	margin-top:80px;
+	text-align:center;
+	clear:both;
+}
+button{
+	background:#ffffff;
+	border:1px #ffffff solid;
+	outline:none;
+}
+div#imgdiv{
+	margin-top:80px;
+	text-align:center;
+}
+div.butdiv{
+	margin-top:5px;
+	float:right;
+}
+input{
+	margin-top:20px;
+	width:30%
+}
