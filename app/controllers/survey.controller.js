@@ -14,3 +14,13 @@ module.exports.showResult=function(req,res){
     res.render('logresult.ejs', {result: resultstr})
   }
 }
+module.exports.showRegisterForm=function(req,res){
+  res.render('register.ejs')
+}
+
+
+module.exports.showRegisterResult=function(req,res){
+    userfisrtname = req.body.first_name
+    result = "welcome! "+userfisrtname
+    res.render('registerresult.ejs',{result:result})
+}

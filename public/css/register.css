@@ -10,13 +10,10 @@ table {
   width:600px;
 }
 
-td#but{
-	align="right";
-}
-
 td.alert_info{
 	color:red;
-	font-size:70%
+	font-size:70%;
+	display:none;
 }
 
 div{
@@ -25,13 +22,13 @@ div{
 }
 
 input{
-	width:100%
-}
-
-td.alert_info{
-	display:none;
+	width:100%;
 }
 button{
-
 	width:160px:
+}
+p#some_empty{
+	margin-top:10px;
+	display:none;
+	text-align:center;
 }
