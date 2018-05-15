@@ -1,7 +1,7 @@
 var express = require('express')
 var passport = require ('passport')
 var controller = require('../controllers/survey.controller')
-var loginController = require ('../controllers/login.controller')
+var loginController = require ('../controllers/user.controller')
 var router = express.Router()
 
 router.get('/', controller.showMainPage)
